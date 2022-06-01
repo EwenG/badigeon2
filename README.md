@@ -1,6 +1,6 @@
 # Badigeon2
 
-Badigeon2 is a build library based on tools.build. Badigeon2 can be used to:
+Badigeon2 is a build library based on [tools.build](https://github.com/clojure/tools.build). Badigeon2 can be used to:
 
 - Sign jar files
 - Deploy jar files to remote maven repository
