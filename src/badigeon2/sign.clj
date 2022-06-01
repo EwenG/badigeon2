@@ -8,10 +8,10 @@
   "Sign pom and jar using gpg. 
 
   Options:
-    :jar-file - required, path to jar file
-    :lib - required, lib symbol
-    :class-dir - required, used to find the pom file
-    :gpg-key - private key used to sign, default to the first private key found"
+    - jar-file: required, path to jar file
+    - lib: required, lib symbol
+    - class-dir: required, used to find the pom file
+    - gpg-key: private key used to sign, default to the first private key found"
   [{:keys [jar-file lib class-dir gpg-key] :as params}]
   (utils/assert-required "sign" params [:lib :jar-file :class-dir])
   (utils/assert-specs "sign" params

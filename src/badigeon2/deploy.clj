@@ -50,15 +50,15 @@
   Returns nil.
   
   Options:
-    :basis - required, used for :mvn/local-repo
-    :lib - required, lib symbol
-    :classifier - classifier string, if needed
-    :version - required, string version
-    :jar-file - required, path to jar file
-    :class-dir - required, used to find the pom file
-    :repository - A map with an :id and a :url key representing the remote repository where the artifacts are to be deployed. The :id is used to find credentials in the settings.xml file when authenticating to the repository
-    :credentials - When authenticating to a repository, the credentials are searched in the maven settings.xml file, using the repository :id, unless the \"credentials\" parameter is used. credentials must be a map with the following optional keys: :username, :password, :private-key, :passphrase
-    :allow-unsigned? - When set to true, allow deploying non-snapshot versions of unsigned artifacts. Default to false."
+    - basis: required, used for :mvn/local-repo
+    - lib: required, lib symbol
+    - classifier: classifier string, if needed
+    - version: required, string version
+    - jar-file: required, path to jar file
+    - class-dir: required, used to find the pom file
+    - repository: A map with an :id and a :url key representing the remote repository where the artifacts are to be deployed. The :id is used to find credentials in the settings.xml file when authenticating to the repository
+    - credentials: When authenticating to a repository, the credentials are searched in the maven settings.xml file, using the repository :id, unless the \"credentials\" parameter is used. credentials must be a map with the following optional keys: :username, :password, :private-key, :passphrase
+    - allow-unsigned?: When set to true, allow deploying non-snapshot versions of unsigned artifacts. Default to false."
   [{:keys [basis lib classifier version jar-file class-dir repository credentials] :as params}]
   (utils/assert-required "deploy" params [:basis :lib :version :jar-file :class-dir])
   (utils/assert-specs "deploy" params
