@@ -85,9 +85,9 @@
 (comment
   (deploy {:basis (api/create-basis)
            :class-dir "target/classes"
-           :lib 'badigeon/badigeon2
+           :lib 'com.github.eweng/badigeon2
            :version "1.1.0"
-           :jar-file "target/badigeon.jar"
+           :jar-file "target/badigeon2.jar"
            :repository {:id "clojars"
                         :url "https://repo.clojars.org/"}})
   )

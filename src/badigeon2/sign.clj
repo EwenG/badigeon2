@@ -44,15 +44,15 @@
                     :class-dir "target/classes"})
   
   (api/jar {:class-dir "target/classes"
-            :jar-file "target/badigeon.jar"})
+            :jar-file "target/badigeon2.jar"})
 
-  (api/write-pom {:lib 'badigeon/badigeon2
+  (api/write-pom {:lib 'com.github.eweng/badigeon2
                   :version "1.1.0"
                   :basis (api/create-basis)
                   :class-dir "target/classes"})
 
-  (sign-gpg {:lib 'badigeon/badigeon2
-             :jar-file "target/badigeon.jar"
+  (sign-gpg {:lib 'com.github.eweng/badigeon2
+             :jar-file "target/badigeon2.jar"
              :class-dir "target/classes"
              :gpg-key "root@eruditorum.org"})
   )
