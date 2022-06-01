@@ -22,10 +22,10 @@
   "Creates a custom JRE using the jlink command. To be run, this function requires a JDK >= version 9. 
   
   Options:
-    - jlink-dir: required, the folder where the custom JRE is output
-    - module-path: the path where the java module are searched for. Default to \"JAVA_HOME/jmods\".
-    - modules: a vector of modules to be used when creating the custom JRE. Default to [\"java.base\"]
-    - jlink-options: the options used when executing the jlink command. Default to [\"--strip-debug\" \"--no-man-pages\" \"--no-header-files\" \"--compress=2\"]"
+  - jlink-dir: required, the folder where the custom JRE is output
+  - module-path: the path where the java module are searched for. Default to \"JAVA_HOME/jmods\".
+  - modules: a vector of modules to be used when creating the custom JRE. Default to [\"java.base\"]
+  - jlink-options: the options used when executing the jlink command. Default to [\"--strip-debug\" \"--no-man-pages\" \"--no-header-files\" \"--compress=2\"]"
   [{:keys [jlink-dir module-path modules jlink-options]
     :or {modules ["java.base"]
          jlink-options ["--strip-debug" "--no-man-pages"
