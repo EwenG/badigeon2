@@ -55,11 +55,11 @@
   - classifier: classifier string, if needed
   - version: required, string version
   - jar-file: required, path to jar file
+  - jar-signature-file: optional, path to jar signature
   - class-dir: required, used to find the pom file
   - repository: A map with an :id and a :url key representing the remote repository where the artifacts are to be deployed. The :id is used to find credentials in the settings.xml file when authenticating to the repository
-  - credentials: When authenticating to a repository, the credentials are searched in the maven settings.xml file, using the repository :id, unless the \"credentials\" parameter is used. credentials must be a map with the following optional keys: :username, :password, :private-key, :passphrase
-  - allow-unsigned?: When set to true, allow deploying non-snapshot versions of unsigned artifacts. Default to false."
-  [{:keys [basis lib classifier version jar-file class-dir repository credentials] :as params}]
+  - credentials: When authenticating to a repository, the credentials are searched in the maven settings.xml file, using the repository :id, unless the \"credentials\" parameter is used. credentials must be a map with the following optional keys: :username, :password, :private-key, :passphrase "
+  [{:keys [basis lib classifier version jar-file jar-signature-file class-dir repository credentials] :as params}]
   (utils/assert-required "deploy" params [:basis :lib :version :jar-file :class-dir])
   (utils/assert-specs "deploy" params
                       :lib ::specs/lib
@@ -70,13 +70,20 @@
         group-id (namespace lib)
         artifact-id (name lib)
         jar-file-file (api/resolve-path jar-file)
+        jar-signature-file-file (when jar-signature-file (api/resolve-path jar-signature-file))
         pom-dir (io/file (api/resolve-path class-dir) "META-INF" "maven" group-id artifact-id)
         pom (io/file pom-dir "pom.xml")
+        pom-signature (when jar-signature-file (io/file pom-dir "pom.xml.asc"))
         system (maven/make-system)
         session (maven/make-session system (or local-repo @maven/cached-local-repo))
         jar-artifact (.setFile (DefaultArtifact. group-id artifact-id classifier "jar" version) jar-file-file)
         artifacts (cond-> [jar-artifact]
-                    (and pom-dir (.exists pom)) (conj (.setFile (DefaultArtifact. group-id artifact-id classifier "pom" version) pom)))
+                    (and pom-dir (.exists pom))
+                    (conj (.setFile (DefaultArtifact. group-id artifact-id classifier "pom" version) pom))
+                    (and jar-signature-file-file (.exists jar-signature-file-file))
+                    (conj (.setFile (DefaultArtifact. group-id artifact-id classifier "jar.asc" version) jar-signature-file-file))
+                    (and pom-signature (.exists pom-signature))
+                    (conj (.setFile (DefaultArtifact. group-id artifact-id classifier "pom.asc" version) pom-signature)))
         deploy-request (-> (DeployRequest.)
                            (.setRepository (remote-repo repository credentials))
                            (.setArtifacts artifacts))]
