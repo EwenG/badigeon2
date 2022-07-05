@@ -2,7 +2,7 @@
   (:require [clojure.set :as set]
             [clojure.spec.alpha :as s]))
 
-(def ^:const version "1.0")
+(def ^:const version "1.1")
 
 (defn assert-required
   "Check that each key in required coll is a key in params and throw if
