@@ -13,7 +13,7 @@ Latest release: 1.0
 [deps.edn](https://clojure.org/guides/deps_and_cli) dependency information:
 
 ```clojure
-badigeon/badigeon2 {:mvn/version "1.1"}
+com.github.eweng/badigeon2 {:mvn/version "1.1"}
 ```
 
 # API
