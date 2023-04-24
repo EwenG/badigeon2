@@ -1,5 +1,5 @@
 (ns badigeon2.deploy
-  (:require [clojure.tools.deps.alpha.util.maven :as maven]
+  (:require [clojure.tools.deps.util.maven :as maven]
             [clojure.java.io :as io]
             [clojure.tools.build.api :as api]
             [clojure.tools.build.api.specs :as specs]
